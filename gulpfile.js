@@ -10,17 +10,17 @@ var autoprefixer = require('gulp-autoprefixer');
 var rigger = require('gulp-rigger');
 
 gulp.task('scss', function () {
-    gulp.src(['scss/*.scss'])
+    gulp.src(['scss/*.scss', 'scss/*/*.scss'])
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer('last 2 version', 'ie 8', 'ie 9'))
         .pipe(concat('style.min.css'))
         .pipe(minifyCSS({
             keepBreaks: false
         }))
-        .pipe(gulp.dest('build/styles/'));
+        .pipe(gulp.dest('build/css/'));
 });
 gulp.task('scss:watch', function () {
-    gulp.watch('scss/*.scss', ['sass']);
+    gulp.watch(['scss/*.scss', 'scss/*/*.scss'], ['scss']);
 });
 
 gulp.task('js', function () {
@@ -45,7 +45,7 @@ gulp.task('html', function(){
         .pipe(gulp.dest('build/html'));
 });
 gulp.task('html:watch', function () {
-    gulp.watch('html/*.html', ['html']);
+    gulp.watch(['html/*.html', 'html/*/*.html'], ['html']);
 });
 
 gulp.task('clean', function() {
